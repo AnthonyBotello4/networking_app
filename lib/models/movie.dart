@@ -8,6 +8,7 @@ class Movie {
   String? releaseDate;
   String? title;
   bool? isFavorite;
+  double? voteAverage;
 
   Movie(
       {this.id,
@@ -15,16 +16,18 @@ class Movie {
         this.popularity,
         this.posterPath,
         this.releaseDate,
-        this.title
+        this.title,
+        this.voteAverage
       });
 
   Movie.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     overview = json['overview'];
-    popularity = json['popularity'];
+    popularity = json['popularity'].toDouble();
     posterPath = json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];
+    voteAverage = json['vote_average'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
@@ -35,13 +38,15 @@ class Movie {
     data['poster_path'] = this.posterPath;
     data['release_date'] = this.releaseDate;
     data['title'] = this.title;
+    data['vote_average'] = this.voteAverage;
     return data;
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'title': title
+      'title': title,
+      'poster_path': posterPath
     };
   }
 }

@@ -44,6 +44,21 @@ class _MovieListState extends State<MovieList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Películas'),
+        actions: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: Row(
+              children: <Widget>[
+                const Text('See Favorites'),
+                IconButton(
+                  icon: const Icon(Icons.favorite_rounded),
+                  onPressed: () {
+                  },
+                ),
+              ],
+            ),
+          )
+        ],
       ),
       body: ListView.builder(
           controller: _scrollController,
@@ -137,14 +152,14 @@ class _MovieRowState extends State<MovieRow> {
       elevation: 2.0,
       child: ListTile(
         leading: Hero(
-          tag: "poster_" + widget.movie.id.toString(),
+          tag: "poster_${widget.movie.id}",
           child: CircleAvatar(
             backgroundImage: NetworkImage(path),
           ),
         ),
         title: Text(widget.movie.title!),
         subtitle: Text(
-          widget.movie.releaseDate!
+          '${widget.movie.releaseDate!} - ${widget.movie.voteAverage}/10'
         ),
         onTap: (){
           Navigator.push(
@@ -156,7 +171,7 @@ class _MovieRowState extends State<MovieRow> {
           });
         },
         trailing: IconButton(
-          icon: Icon(Icons.favorite),
+          icon: const Icon(Icons.favorite),
           color: favorite ? Colors.red : Colors.grey,
           onPressed: (){
             favorite

@@ -15,10 +15,10 @@ class DbHelper{
   Future<Database> openDb() async {
      if (db == null){
        db = await openDatabase(
-           join(await getDatabasesPath(), 'movies.db'),
+           join(await getDatabasesPath(), 'movies.dbb'),
            onCreate: (database, version){
              database.execute(
-                 'CREATE TABLE movies(id INTEGER PRIMARY KEY, title TEXT)'
+                 'CREATE TABLE movies(id INTEGER PRIMARY KEY, title TEXT, poster_path TEXT)'
              );
            },
            version: version
