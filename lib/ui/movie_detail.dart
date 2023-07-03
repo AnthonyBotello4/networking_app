@@ -13,6 +13,7 @@ class MovieDetail extends StatefulWidget {
 
 class _MovieDetailState extends State<MovieDetail> {
   final Movie movie;
+  //bool favorite = false;
   DbHelper dbHelper = DbHelper();
   String path = '';
 
@@ -20,6 +21,7 @@ class _MovieDetailState extends State<MovieDetail> {
 
   @override
   void initState() {
+    //favorite = false;
     dbHelper = DbHelper();
     super.initState();
   }
@@ -31,8 +33,19 @@ class _MovieDetailState extends State<MovieDetail> {
     }
   }
 
+  // Future isFavorite(Movie movie) async {
+  //   await dbHelper.openDb();
+  //   favorite = await dbHelper.isFavorite(movie);
+  //   setState(() {
+  //     movie.isFavorite = favorite;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+
+    //isFavorite(movie);
+
     double height = MediaQuery.of(context).size.height;
 
     if (movie.posterPath != null) {
@@ -41,6 +54,7 @@ class _MovieDetailState extends State<MovieDetail> {
       path =
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png';
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +82,8 @@ class _MovieDetailState extends State<MovieDetail> {
                     : dbHelper.insertMovie(movie);
 
                 setState(() {
-                  movie.isFavorite = !(movie.isFavorite!);
+                  var fav = movie.isFavorite!;
+                  movie.isFavorite = !fav;
                 });
               },
             ),

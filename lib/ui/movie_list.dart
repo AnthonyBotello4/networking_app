@@ -3,6 +3,7 @@ import 'package:networking_app/util/db_helper.dart';
 import 'package:networking_app/util/http_helper.dart';
 
 import '../models/movie.dart';
+import 'favorite_movies.dart';
 import 'movie_detail.dart';
 
 
@@ -53,6 +54,11 @@ class _MovieListState extends State<MovieList> {
                 IconButton(
                   icon: const Icon(Icons.favorite_rounded),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) =>
+                          FavMovies()),
+                    );
                   },
                 ),
               ],
@@ -140,6 +146,8 @@ class _MovieRowState extends State<MovieRow> {
 
   @override
   Widget build(BuildContext context) {
+
+    isFavorite(movie);
 
     if (movie.posterPath != null){
       path = 'https://image.tmdb.org/t/p/w500${movie.posterPath}';

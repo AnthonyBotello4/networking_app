@@ -17,7 +17,8 @@ class Movie {
         this.posterPath,
         this.releaseDate,
         this.title,
-        this.voteAverage
+        this.voteAverage,
+        this.isFavorite
       });
 
   Movie.fromJson(Map<String, dynamic> json) {
@@ -46,7 +47,8 @@ class Movie {
     return {
       'id': id,
       'title': title,
-      'poster_path': posterPath
+      'poster_path': posterPath,
+      'overview': overview
     };
   }
 }

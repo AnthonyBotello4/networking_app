@@ -18,7 +18,7 @@ class DbHelper{
            join(await getDatabasesPath(), 'movies.dbb'),
            onCreate: (database, version){
              database.execute(
-                 'CREATE TABLE movies(id INTEGER PRIMARY KEY, title TEXT, poster_path TEXT)'
+                 'CREATE TABLE movies(id INTEGER PRIMARY KEY, title TEXT, poster_path TEXT, overview TEXT)'
              );
            },
            version: version
@@ -26,6 +26,21 @@ class DbHelper{
      }
 
      return db!;
+  }
+
+  //obtener todas las peliculas
+  Future<List<Movie>> getMovies() async {
+    await openDb();
+    final List<Map<String, dynamic>> maps = await db!.query('movies');
+    return List.generate(maps.length, (i){
+      return Movie(
+        id: maps[i]['id'],
+        title: maps[i]['title'],
+        posterPath: maps[i]['poster_path'],
+        overview: maps[i]['overview'],
+        isFavorite: true
+      );
+    });
   }
 
   Future<int?> insertMovie(Movie movie) async {
