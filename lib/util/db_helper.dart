@@ -28,8 +28,8 @@ class DbHelper{
      return db!;
   }
 
-  Future<int> insertMovie(Movie movie) async {
-    int id = await db!.insert(
+  Future<int?> insertMovie(Movie movie) async {
+    int? id = await db!.insert(
         'movies',
         movie.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace
@@ -43,7 +43,7 @@ class DbHelper{
         where: 'id = ?',
         whereArgs: [movie.id]
     );
-    return maps.length > 1;
+    return maps.length > 0;
   }
 
   Future<int> deleteMovie(Movie movie) async {
