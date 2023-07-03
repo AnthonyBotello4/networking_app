@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class Movie {
   int? id;
   String? overview;
@@ -5,6 +7,7 @@ class Movie {
   String? posterPath;
   String? releaseDate;
   String? title;
+  bool? isFavorite;
 
   Movie(
       {this.id,
@@ -12,7 +15,8 @@ class Movie {
         this.popularity,
         this.posterPath,
         this.releaseDate,
-        this.title});
+        this.title
+      });
 
   Movie.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,5 +36,12 @@ class Movie {
     data['release_date'] = this.releaseDate;
     data['title'] = this.title;
     return data;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title
+    };
   }
 }
